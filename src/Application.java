@@ -43,7 +43,9 @@ public class Application {
         int countOfSteps = in.nextInt();
 
         SuperMarket superMarket = new SuperMarket(cashes);
-        new CustomerGenerator(superMarket, cashes, countOfCustomers).start();
+        CustomerGenerator customerGenerator =  new CustomerGenerator(superMarket, cashes, countOfCustomers);
+        customerGenerator.setDaemon(true);
+        customerGenerator.start();
         new CashService(superMarket, cashes, countOfSteps).start();
     }
 }
