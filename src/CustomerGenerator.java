@@ -15,5 +15,6 @@ public class CustomerGenerator extends Thread{
             Cash choosingCash = customer.choosingCash(this.cashes);
             this.superMarket.addCustomerToQueue(customer, choosingCash);
         }
+        this.superMarket.stopGenerate();
     }
 }

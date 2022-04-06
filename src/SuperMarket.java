@@ -1,13 +1,18 @@
 public class SuperMarket {
     private volatile Cash[] cashes = new Cash[4];
     private volatile boolean availableForService = false;
+    private volatile boolean isGeneratorRun = true;
 
     public SuperMarket(Cash[] cashes){
         this.cashes = cashes;
     }
 
+    public void stopGenerate(){
+        isGeneratorRun = false;
+    }
+
     public synchronized void serviceAll(){
-        while(!availableForService){
+        while(!availableForService && isGeneratorRun){
             try{
                 this.wait();
             } catch (InterruptedException e) {
